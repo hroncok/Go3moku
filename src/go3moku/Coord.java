@@ -26,4 +26,28 @@ public class Coord {
         this.y = 0;
         this.z = 0;
     }
+    
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if (other == null) {
+            return false;
+        }
+        if (getClass() != other.getClass()) {
+            return false;
+        }
+        Coord c = (Coord)other;
+        return (x == c.x && y == c.y && z == c.z);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 47 * hash + this.x;
+        hash = 47 * hash + this.y;
+        hash = 47 * hash + this.z;
+        return hash;
+    }
 }
