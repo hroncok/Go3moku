@@ -83,6 +83,7 @@ public class Game {
     }
     
     private static boolean check4Win(Mark a, Mark b, Mark c, Mark d) {
+        // They cannot be all nulls, as one of them was just played
         return (a == b && a == c && a == d);
     }
     
