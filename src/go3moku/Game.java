@@ -53,6 +53,7 @@ public class Game {
             }
         }
         game.move = Mark.X;
+        game.ui.startNew();
         while (game.move != null) {
             Player pl = currentPlayer();
             // While the move is not legal, ask for other one
@@ -121,9 +122,9 @@ public class Game {
         }
         if (c.x == (SIZE-1-c.y)) {
             if (check4Win(game.fields[c.x][c.y][c.z],
-                          game.fields[(c.x+1) % SIZE][(c.y-1) % SIZE][c.z],
-                          game.fields[(c.x+2) % SIZE][(c.y-2) % SIZE][c.z],
-                          game.fields[(c.x+3) % SIZE][(c.y-3) % SIZE][c.z])) {
+                          game.fields[(c.x+1) % SIZE][(c.y-1+SIZE) % SIZE][c.z],
+                          game.fields[(c.x+2) % SIZE][(c.y-2+SIZE) % SIZE][c.z],
+                          game.fields[(c.x+3) % SIZE][(c.y-3+SIZE) % SIZE][c.z])) {
                 return true;
             }
         }
@@ -138,9 +139,9 @@ public class Game {
         }
         if (c.x == (SIZE-1-c.z)) {
             if (check4Win(game.fields[c.x][c.y][c.z],
-                          game.fields[(c.x+1) % SIZE][c.y][(c.z-1) % SIZE],
-                          game.fields[(c.x+2) % SIZE][c.y][(c.z-2) % SIZE],
-                          game.fields[(c.x+3) % SIZE][c.y][(c.z-3) % SIZE])) {
+                          game.fields[(c.x+1) % SIZE][c.y][(c.z-1+SIZE) % SIZE],
+                          game.fields[(c.x+2) % SIZE][c.y][(c.z-2+SIZE) % SIZE],
+                          game.fields[(c.x+3) % SIZE][c.y][(c.z-3+SIZE) % SIZE])) {
                 return true;
             }
         }
@@ -155,9 +156,9 @@ public class Game {
         }
         if (c.y == (SIZE-1-c.z)) {
             if (check4Win(game.fields[c.x][c.y][c.z],
-                          game.fields[c.x][(c.y+1) % SIZE][(c.z-1) % SIZE],
-                          game.fields[c.x][(c.y+2) % SIZE][(c.z-2) % SIZE],
-                          game.fields[c.x][(c.y+3) % SIZE][(c.z-3) % SIZE])) {
+                          game.fields[c.x][(c.y+1) % SIZE][(c.z-1+SIZE) % SIZE],
+                          game.fields[c.x][(c.y+2) % SIZE][(c.z-2+SIZE) % SIZE],
+                          game.fields[c.x][(c.y+3) % SIZE][(c.z-3+SIZE) % SIZE])) {
                 return true;
             }
         }
@@ -172,25 +173,25 @@ public class Game {
         }
         if (c.x == (SIZE-1-c.y) && c.x == c.z) {
             if (check4Win(game.fields[c.x][c.y][c.z],
-                          game.fields[(c.x+1) % SIZE][(c.y-1) % SIZE][(c.z+1) % SIZE],
-                          game.fields[(c.x+2) % SIZE][(c.y-2) % SIZE][(c.z+1) % SIZE],
-                          game.fields[(c.x+3) % SIZE][(c.y-3) % SIZE][(c.z+1) % SIZE])) {
+                          game.fields[(c.x+1) % SIZE][(c.y-1+SIZE) % SIZE][(c.z+1) % SIZE],
+                          game.fields[(c.x+2) % SIZE][(c.y-2+SIZE) % SIZE][(c.z+2) % SIZE],
+                          game.fields[(c.x+3) % SIZE][(c.y-3+SIZE) % SIZE][(c.z+3) % SIZE])) {
                 return true;
             }
         }
         if (c.x == (SIZE-1-c.y) && c.y == c.z) {
             if (check4Win(game.fields[c.x][c.y][c.z],
-                          game.fields[(c.x+1) % SIZE][(c.y-1) % SIZE][(c.z-1) % SIZE],
-                          game.fields[(c.x+2) % SIZE][(c.y-2) % SIZE][(c.z-1) % SIZE],
-                          game.fields[(c.x+3) % SIZE][(c.y-3) % SIZE][(c.z-1) % SIZE])) {
+                          game.fields[(c.x+1) % SIZE][(c.y-1+SIZE) % SIZE][(c.z-1+SIZE) % SIZE],
+                          game.fields[(c.x+2) % SIZE][(c.y-2+SIZE) % SIZE][(c.z-2+SIZE) % SIZE],
+                          game.fields[(c.x+3) % SIZE][(c.y-3+SIZE) % SIZE][(c.z-3+SIZE) % SIZE])) {
                 return true;
             }
         }
         if (c.x == (SIZE-1-c.z) && c.x == c.y) {
             if (check4Win(game.fields[c.x][c.y][c.z],
-                          game.fields[(c.x+1) % SIZE][(c.y+1) % SIZE][(c.z-1) % SIZE],
-                          game.fields[(c.x+2) % SIZE][(c.y+2) % SIZE][(c.z-1) % SIZE],
-                          game.fields[(c.x+3) % SIZE][(c.y+3) % SIZE][(c.z-1) % SIZE])) {
+                          game.fields[(c.x+1) % SIZE][(c.y+1) % SIZE][(c.z-1+SIZE) % SIZE],
+                          game.fields[(c.x+2) % SIZE][(c.y+2) % SIZE][(c.z-2+SIZE) % SIZE],
+                          game.fields[(c.x+3) % SIZE][(c.y+3) % SIZE][(c.z-3+SIZE) % SIZE])) {
                 return true;
             }
         }
@@ -229,5 +230,7 @@ public class Game {
                 MainWindow mw = new MainWindow();
             }
         });*/
+        Game.init(new CLI());
+        Game.startNewGame(new Human(), new Random());
     }
 }

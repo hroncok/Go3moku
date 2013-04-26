@@ -16,7 +16,7 @@ public interface UI {
      * Prepares the UI for a new game.
      * This means for example cleaning all fileds.
      */
-    void startnew();
+    void startNew();
     
     /**
      * @brief Put a mark to a specific field
