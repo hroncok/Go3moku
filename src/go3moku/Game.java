@@ -16,6 +16,7 @@ public class Game {
     private Player x;
     private Player o;
     private UI ui;
+    private boolean running = false;
     
     /**
      * @brief Sets the UI and starts the application
@@ -42,9 +43,8 @@ public class Game {
         game.x.set(Mark.X);
         game.o = o;
         game.o.set(Mark.O);
+        game.running = true;
     }
-    
-    
     
     /**
      * @brief Get input form UI
