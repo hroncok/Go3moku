@@ -32,20 +32,19 @@ public interface UI {
      * @brief Removes a mark from a specific field
      * UI will remove a mark from the given localtion.
      * If there was no mark, nothing happens.
-     * If the field/mark was previously highlithed, this stops it.
      * @param where A place to clear
      */
     void clear(Coord where);
     
-    /**
+    /* NOT IMPLEMENTED
      * @brief Highlights a specified field or marker on it
      * This is used, when the game is over and we want to highlight winning row.
      * Each field of the row will be highlighted in a diffrend method call.
      * If this is called on an empty field (should never happen), do nothing.
      * Definition of highlight is left upon implementing class.
      * @param where What coordinates to highlight
-     */
-    void highlight(Coord where);
+     *
+    void highlight(Coord where); */
     
     /**
      * @brief Read input form the user via UI

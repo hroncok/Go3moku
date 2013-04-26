@@ -82,35 +82,32 @@ public class Game {
         return true;
     }
     
-    // Highlight is hacky called from here
     private static boolean check4Win(Mark a, Mark b, Mark c, Mark d) {
-        
-        return false;
+        return (a == b && a == c && a == d);
     }
     
     // This will be pain, brace yourself
     private static boolean checkWin(Coord c) {
-        boolean win = false; // To highlith even more complex wins
         // Row
         if (check4Win(game.fields[c.x][c.y][c.z],
                       game.fields[(c.x+1) % SIZE][c.y][c.z],
                       game.fields[(c.x+2) % SIZE][c.y][c.z],
                       game.fields[(c.x+3) % SIZE][c.y][c.z])) {
-            win = true;
+            return true;
         }
         // Column
         if (check4Win(game.fields[c.x][c.y][c.z],
                       game.fields[c.x][(c.y+1) % SIZE][c.z],
                       game.fields[c.x][(c.y+2) % SIZE][c.z],
                       game.fields[c.x][(c.y+3) % SIZE][c.z])) {
-            win = true;
+            return true;
         }
         // Tunel
         if (check4Win(game.fields[c.x][c.y][c.z],
                       game.fields[c.x][c.y][(c.z+1) % SIZE],
                       game.fields[c.x][c.y][(c.z+2) % SIZE],
                       game.fields[c.x][c.y][(c.z+3) % SIZE])) {
-            win = true;
+            return true;
         }
         // XY diagonals
         if (c.x == c.y) {
@@ -118,7 +115,7 @@ public class Game {
                           game.fields[(c.x+1) % SIZE][(c.y+1) % SIZE][c.z],
                           game.fields[(c.x+2) % SIZE][(c.y+2) % SIZE][c.z],
                           game.fields[(c.x+3) % SIZE][(c.y+3) % SIZE][c.z])) {
-                win = true;
+                return true;
             }
         }
         if (c.x == (SIZE-1-c.y)) {
@@ -126,7 +123,7 @@ public class Game {
                           game.fields[(c.x+1) % SIZE][(c.y-1) % SIZE][c.z],
                           game.fields[(c.x+2) % SIZE][(c.y-2) % SIZE][c.z],
                           game.fields[(c.x+3) % SIZE][(c.y-3) % SIZE][c.z])) {
-                win = true;
+                return true;
             }
         }
         // XZ diagonals
@@ -135,7 +132,7 @@ public class Game {
                           game.fields[(c.x+1) % SIZE][c.y][(c.z+1) % SIZE],
                           game.fields[(c.x+2) % SIZE][c.y][(c.z+2) % SIZE],
                           game.fields[(c.x+3) % SIZE][c.y][(c.z+3) % SIZE])) {
-                win = true;
+                return true;
             }
         }
         if (c.x == (SIZE-1-c.z)) {
@@ -143,7 +140,7 @@ public class Game {
                           game.fields[(c.x+1) % SIZE][c.y][(c.z-1) % SIZE],
                           game.fields[(c.x+2) % SIZE][c.y][(c.z-2) % SIZE],
                           game.fields[(c.x+3) % SIZE][c.y][(c.z-3) % SIZE])) {
-                win = true;
+                return true;
             }
         }
         // YZ diagonals
@@ -152,7 +149,7 @@ public class Game {
                           game.fields[c.x][(c.y+1) % SIZE][(c.z+1) % SIZE],
                           game.fields[c.x][(c.y+2) % SIZE][(c.z+2) % SIZE],
                           game.fields[c.x][(c.y+3) % SIZE][(c.z+3) % SIZE])) {
-                win = true;
+                return true;
             }
         }
         if (c.y == (SIZE-1-c.z)) {
@@ -160,7 +157,7 @@ public class Game {
                           game.fields[c.x][(c.y+1) % SIZE][(c.z-1) % SIZE],
                           game.fields[c.x][(c.y+2) % SIZE][(c.z-2) % SIZE],
                           game.fields[c.x][(c.y+3) % SIZE][(c.z-3) % SIZE])) {
-                win = true;
+                return true;
             }
         }
         // XYZ diagonals
@@ -169,7 +166,7 @@ public class Game {
                           game.fields[(c.x+1) % SIZE][(c.y+1) % SIZE][(c.z+1) % SIZE],
                           game.fields[(c.x+2) % SIZE][(c.y+2) % SIZE][(c.z+2) % SIZE],
                           game.fields[(c.x+3) % SIZE][(c.y+3) % SIZE][(c.z+3) % SIZE])) {
-                win = true;
+                return true;
             }
         }
         if (c.x == (SIZE-1-c.y) && c.x == c.z) {
@@ -177,7 +174,7 @@ public class Game {
                           game.fields[(c.x+1) % SIZE][(c.y-1) % SIZE][(c.z+1) % SIZE],
                           game.fields[(c.x+2) % SIZE][(c.y-2) % SIZE][(c.z+1) % SIZE],
                           game.fields[(c.x+3) % SIZE][(c.y-3) % SIZE][(c.z+1) % SIZE])) {
-                win = true;
+                return true;
             }
         }
         if (c.x == (SIZE-1-c.y) && c.y == c.z) {
@@ -185,7 +182,7 @@ public class Game {
                           game.fields[(c.x+1) % SIZE][(c.y-1) % SIZE][(c.z-1) % SIZE],
                           game.fields[(c.x+2) % SIZE][(c.y-2) % SIZE][(c.z-1) % SIZE],
                           game.fields[(c.x+3) % SIZE][(c.y-3) % SIZE][(c.z-1) % SIZE])) {
-                win = true;
+                return true;
             }
         }
         if (c.x == (SIZE-1-c.z) && c.x == c.y) {
@@ -193,10 +190,10 @@ public class Game {
                           game.fields[(c.x+1) % SIZE][(c.y+1) % SIZE][(c.z-1) % SIZE],
                           game.fields[(c.x+2) % SIZE][(c.y+2) % SIZE][(c.z-1) % SIZE],
                           game.fields[(c.x+3) % SIZE][(c.y+3) % SIZE][(c.z-1) % SIZE])) {
-                win = true;
+                return true;
             }
         }
-        return win;
+        return false;
     }
     
     private static Player currentPlayer() {
