@@ -17,7 +17,7 @@ public class Game {
     private Player x;
     private Player o;
     private UI ui;
-    private boolean running = false;
+    private Mark move = null;
     private Mark[][][] fields = new Mark[SIZE][SIZE][SIZE];
     
     /**
@@ -35,7 +35,7 @@ public class Game {
     }
     
     /**
-     * @brief Initialise a new gameplay
+     * @brief Initialise a new gameplay and run the main cycle
      * Sets the players for the game and clears all fields
      * @param x
      * @param o
@@ -45,7 +45,168 @@ public class Game {
         game.x.set(Mark.X);
         game.o = o;
         game.o.set(Mark.O);
-        game.running = true;
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < SIZE; j++) {
+                for (int k = 0; k < SIZE; k++) {
+                    game.fields[i][j][k] = null;
+                }
+            }
+        }
+        game.move = Mark.X;
+        while (game.move != null) {
+            Player pl = currentPlayer();
+            // While the move is not legal, ask for other one
+            while (!play(pl.play())) {}
+            // Other player goes
+            game.move = Mark.other(game.move);
+        }
+    }
+
+    private static boolean coordOutOfRange(Coord c) {
+        return ((c.x >= SIZE) || (c.y >= SIZE) || (c.z >= SIZE) || (c.x < 0) || (c.y < 0) || (c.z < 0));
+    }
+    
+    private static boolean play(Coord c) {
+        // Ilegal move
+        if (coordOutOfRange(c) || game.fields[c.x][c.y][c.z] != null) {
+            return false;
+        }
+        // Put it to data
+        game.fields[c.x][c.y][c.z] = game.move;
+        // Put it to UI
+        game.ui.put(game.move, c);
+        if (checkWin(c)) {
+            game.ui.infoText("Player "+game.move+" wins!");
+            game.move = null;
+        }
+        return true;
+    }
+    
+    // Highlight is hacky called from here
+    private static boolean check4Win(Mark a, Mark b, Mark c, Mark d) {
+        
+        return false;
+    }
+    
+    // This will be pain, brace yourself
+    private static boolean checkWin(Coord c) {
+        boolean win = false; // To highlith even more complex wins
+        // Row
+        if (check4Win(game.fields[c.x][c.y][c.z],
+                      game.fields[(c.x+1) % SIZE][c.y][c.z],
+                      game.fields[(c.x+2) % SIZE][c.y][c.z],
+                      game.fields[(c.x+3) % SIZE][c.y][c.z])) {
+            win = true;
+        }
+        // Column
+        if (check4Win(game.fields[c.x][c.y][c.z],
+                      game.fields[c.x][(c.y+1) % SIZE][c.z],
+                      game.fields[c.x][(c.y+2) % SIZE][c.z],
+                      game.fields[c.x][(c.y+3) % SIZE][c.z])) {
+            win = true;
+        }
+        // Tunel
+        if (check4Win(game.fields[c.x][c.y][c.z],
+                      game.fields[c.x][c.y][(c.z+1) % SIZE],
+                      game.fields[c.x][c.y][(c.z+2) % SIZE],
+                      game.fields[c.x][c.y][(c.z+3) % SIZE])) {
+            win = true;
+        }
+        // XY diagonals
+        if (c.x == c.y) {
+            if (check4Win(game.fields[c.x][c.y][c.z],
+                          game.fields[(c.x+1) % SIZE][(c.y+1) % SIZE][c.z],
+                          game.fields[(c.x+2) % SIZE][(c.y+2) % SIZE][c.z],
+                          game.fields[(c.x+3) % SIZE][(c.y+3) % SIZE][c.z])) {
+                win = true;
+            }
+        }
+        if (c.x == (SIZE-1-c.y)) {
+            if (check4Win(game.fields[c.x][c.y][c.z],
+                          game.fields[(c.x+1) % SIZE][(c.y-1) % SIZE][c.z],
+                          game.fields[(c.x+2) % SIZE][(c.y-2) % SIZE][c.z],
+                          game.fields[(c.x+3) % SIZE][(c.y-3) % SIZE][c.z])) {
+                win = true;
+            }
+        }
+        // XZ diagonals
+        if (c.x == c.z) {
+            if (check4Win(game.fields[c.x][c.y][c.z],
+                          game.fields[(c.x+1) % SIZE][c.y][(c.z+1) % SIZE],
+                          game.fields[(c.x+2) % SIZE][c.y][(c.z+2) % SIZE],
+                          game.fields[(c.x+3) % SIZE][c.y][(c.z+3) % SIZE])) {
+                win = true;
+            }
+        }
+        if (c.x == (SIZE-1-c.z)) {
+            if (check4Win(game.fields[c.x][c.y][c.z],
+                          game.fields[(c.x+1) % SIZE][c.y][(c.z-1) % SIZE],
+                          game.fields[(c.x+2) % SIZE][c.y][(c.z-2) % SIZE],
+                          game.fields[(c.x+3) % SIZE][c.y][(c.z-3) % SIZE])) {
+                win = true;
+            }
+        }
+        // YZ diagonals
+        if (c.y == c.z) {
+            if (check4Win(game.fields[c.x][c.y][c.z],
+                          game.fields[c.x][(c.y+1) % SIZE][(c.z+1) % SIZE],
+                          game.fields[c.x][(c.y+2) % SIZE][(c.z+2) % SIZE],
+                          game.fields[c.x][(c.y+3) % SIZE][(c.z+3) % SIZE])) {
+                win = true;
+            }
+        }
+        if (c.y == (SIZE-1-c.z)) {
+            if (check4Win(game.fields[c.x][c.y][c.z],
+                          game.fields[c.x][(c.y+1) % SIZE][(c.z-1) % SIZE],
+                          game.fields[c.x][(c.y+2) % SIZE][(c.z-2) % SIZE],
+                          game.fields[c.x][(c.y+3) % SIZE][(c.z-3) % SIZE])) {
+                win = true;
+            }
+        }
+        // XYZ diagonals
+        if (c.x == c.y && c.x == c.z) {
+            if (check4Win(game.fields[c.x][c.y][c.z],
+                          game.fields[(c.x+1) % SIZE][(c.y+1) % SIZE][(c.z+1) % SIZE],
+                          game.fields[(c.x+2) % SIZE][(c.y+2) % SIZE][(c.z+2) % SIZE],
+                          game.fields[(c.x+3) % SIZE][(c.y+3) % SIZE][(c.z+3) % SIZE])) {
+                win = true;
+            }
+        }
+        if (c.x == (SIZE-1-c.y) && c.x == c.z) {
+            if (check4Win(game.fields[c.x][c.y][c.z],
+                          game.fields[(c.x+1) % SIZE][(c.y-1) % SIZE][(c.z+1) % SIZE],
+                          game.fields[(c.x+2) % SIZE][(c.y-2) % SIZE][(c.z+1) % SIZE],
+                          game.fields[(c.x+3) % SIZE][(c.y-3) % SIZE][(c.z+1) % SIZE])) {
+                win = true;
+            }
+        }
+        if (c.x == (SIZE-1-c.y) && c.y == c.z) {
+            if (check4Win(game.fields[c.x][c.y][c.z],
+                          game.fields[(c.x+1) % SIZE][(c.y-1) % SIZE][(c.z-1) % SIZE],
+                          game.fields[(c.x+2) % SIZE][(c.y-2) % SIZE][(c.z-1) % SIZE],
+                          game.fields[(c.x+3) % SIZE][(c.y-3) % SIZE][(c.z-1) % SIZE])) {
+                win = true;
+            }
+        }
+        if (c.x == (SIZE-1-c.z) && c.x == c.y) {
+            if (check4Win(game.fields[c.x][c.y][c.z],
+                          game.fields[(c.x+1) % SIZE][(c.y+1) % SIZE][(c.z-1) % SIZE],
+                          game.fields[(c.x+2) % SIZE][(c.y+2) % SIZE][(c.z-1) % SIZE],
+                          game.fields[(c.x+3) % SIZE][(c.y+3) % SIZE][(c.z-1) % SIZE])) {
+                win = true;
+            }
+        }
+        return win;
+    }
+    
+    private static Player currentPlayer() {
+        if (game.move == Mark.X) {
+            return game.x;
+        }
+        if (game.move == Mark.O) {
+            return game.o;
+        }
+        return null;
     }
     
     /**
