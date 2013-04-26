@@ -12,11 +12,13 @@ package go3moku;
 public class Game {
     private static Game game;
     private Game() {}
+    public static final int SIZE = 4;
     
     private Player x;
     private Player o;
     private UI ui;
     private boolean running = false;
+    private Mark[][][] fields = new Mark[SIZE][SIZE][SIZE];
     
     /**
      * @brief Sets the UI and starts the application
@@ -68,7 +70,5 @@ public class Game {
                 MainWindow mw = new MainWindow();
             }
         });*/
-        System.out.println("tada");
-        
     }
 }
