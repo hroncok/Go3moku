@@ -247,7 +247,7 @@ public class Game {
                 MainWindow mw = new MainWindow();
             }
         });*/
-        Game.init(new CLI());
+        Game.init(new GUI());
         Game.startNewGame(new Human(), new Random());
     }
 }
