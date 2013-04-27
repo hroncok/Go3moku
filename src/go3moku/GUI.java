@@ -37,9 +37,11 @@ public class GUI extends JFrame implements UI {
         for (int i = 0; i < Game.SIZE; i++) {
             levels[i] = new JPanel();
             levels[i].setLayout(new GridLayout(Game.SIZE, Game.SIZE));
-            for (int j = 0; j < Game.SIZE*Game.SIZE; j++) {
-                buttons[i][j/Game.SIZE][j%Game.SIZE] = new JButton(" ");
-                levels[i].add(buttons[i][j/Game.SIZE][j%Game.SIZE]);
+            for (int j = 0; j < Game.SIZE; j++) {
+                for (int k = 0; k < Game.SIZE; k++) {
+                    buttons[i][j][k] = new JButton(" ");
+                    levels[i].add(buttons[i][j][k]);
+                }
             }
             levelsWrapper.add(levels[i]);
         }
@@ -64,32 +66,39 @@ public class GUI extends JFrame implements UI {
     
     @Override
     public void startNew() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        for (int i = 0; i < Game.SIZE; i++) {
+            for (int j = 0; j < Game.SIZE; j++) {
+                for (int k = 0; k < Game.SIZE; k++) {
+                    clear(new Coord(i,j,k));
+                }
+            }
+        }
     }
 
     @Override
     public void put(Mark mark, Coord where) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        buttons[where.x][where.y][where.z].setText(""+mark);
     }
 
     @Override
     public void clear(Coord where) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        buttons[where.x][where.y][where.z].setText(" ");
     }
 
     @Override
     public Coord input() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        // Do nothing yet
+        return new Coord();
     }
 
     @Override
     public void infoText(String message) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        // Do nothing yet
     }
 
     @Override
     public void removeInfoText() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        // Do nothing yet
     }
     
 }

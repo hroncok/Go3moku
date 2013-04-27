@@ -4,6 +4,8 @@
  */
 package go3moku;
 
+import javax.swing.SwingUtilities;
+
 /**
  * @brief The main singleton Game
  * This class controls the game. It is ment to be singleton.
@@ -244,10 +246,11 @@ public class Game {
 
             @Override
             public void run() {
-                MainWindow mw = new MainWindow();
+                Game.init(new GUI());
+                Game.startNewGame(new Human(), new Random());
             }
         });*/
-        Game.init(new GUI());
-        Game.startNewGame(new Human(), new Random());
+    Game.init(new GUI());
+    Game.startNewGame(new Random(), new Random());
     }
 }
