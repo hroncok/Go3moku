@@ -80,6 +80,23 @@ public class Game {
             game.ui.infoText("Player "+game.move+" wins!");
             game.move = null;
         }
+        if (checkFull()) {
+            game.ui.infoText("It's a draw!");
+            game.move = null;
+        }
+        return true;
+    }
+    
+    private static boolean checkFull() {
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < SIZE; j++) {
+                for (int k = 0; k < SIZE; k++) {
+                    if (game.fields[i][j][k] == null) {
+                        return false;
+                    }
+                }
+            }
+        }
         return true;
     }
     
