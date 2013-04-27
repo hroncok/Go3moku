@@ -20,6 +20,17 @@ public class Coord {
         this.z = z;
     }
     
+    /// String constructor
+    public Coord(String s) {
+        String[] intsToParse = s.split(" ");
+        if (intsToParse.length != 3) {
+            throw new IllegalArgumentException("Input string doesn't contain 3 ints!");
+        }
+        this.x = Integer.parseInt(intsToParse[0]);
+        this.y = Integer.parseInt(intsToParse[1]);
+        this.z = Integer.parseInt(intsToParse[2]);
+    }
+    
     /// Default coord will have [0,0,0]
     public Coord() {
         this.x = 0;
