@@ -6,6 +6,8 @@ package go3moku;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JButton;
@@ -16,7 +18,7 @@ import javax.swing.JPanel;
  *
  * @author churchyard
  */
-public class GUI extends JFrame implements UI {
+public class GUI extends JFrame implements UI, ActionListener {
 
     private JButton newGame;
     private JPanel toolbar;
@@ -24,11 +26,15 @@ public class GUI extends JFrame implements UI {
     private JPanel[]  levels;
     private JButton[][][] buttons;
     
+    private boolean action;
+    private Coord click;
     
     public GUI() {
         setVisible(true);
         setResizable(false);
         setSize(1024, 170);
+
+        action = false;
 
         levelsWrapper = new JPanel();
         levelsWrapper.setLayout(new GridLayout(1, Game.SIZE, 4, 4));        
@@ -40,6 +46,7 @@ public class GUI extends JFrame implements UI {
             for (int j = 0; j < Game.SIZE; j++) {
                 for (int k = 0; k < Game.SIZE; k++) {
                     buttons[i][j][k] = new JButton(" ");
+                    buttons[i][j][k].setActionCommand(i+" "+j+" "+k); // tricky :)
                     levels[i].add(buttons[i][j][k]);
                 }
             }
@@ -49,6 +56,7 @@ public class GUI extends JFrame implements UI {
         
         toolbar = new JPanel();
         newGame = new JButton("New game");
+        newGame.setActionCommand("NEWGAME");
         
         toolbar.add(newGame);
         this.add(toolbar,BorderLayout.SOUTH);
@@ -62,6 +70,20 @@ public class GUI extends JFrame implements UI {
                 System.exit(0);
             }
         });
+    }
+    
+    @Override
+    public void actionPerformed(ActionEvent evt) {
+        System.out.println("magic");
+        String cmd = evt.getActionCommand();
+        if (cmd == "NEWGAME") {
+            //
+            return;
+        }
+        if (!action) {
+            return;
+        }
+        click = new Coord(cmd);
     }
     
     @Override
@@ -87,8 +109,12 @@ public class GUI extends JFrame implements UI {
 
     @Override
     public Coord input() {
-        // Do nothing yet
-        return new Coord();
+        action = true;
+        while (click == null) {}
+        Coord ret = click;
+        action = false;
+        click = null;
+        return ret;
     }
 
     @Override

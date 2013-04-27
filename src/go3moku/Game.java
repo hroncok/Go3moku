@@ -251,6 +251,6 @@ public class Game {
             }
         });*/
     Game.init(new GUI());
-    Game.startNewGame(new Random(), new Random());
+    Game.startNewGame(new Human(), new Random());
     }
 }
