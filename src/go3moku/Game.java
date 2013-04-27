@@ -4,6 +4,8 @@
  */
 package go3moku;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.SwingUtilities;
 
 /**
@@ -236,21 +238,35 @@ public class Game {
         return game.ui.input();
     }
     
-    
+    /**
+     * @brief Is the Game initialised
+     * @return Wheather the Game is initialised
+     */
+    public static boolean inited() {
+        if (game == null || game.ui == null) {
+            return false;
+        }
+        return true;
+    }
     
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        /*SwingUtilities.invokeLater(new Runnable() {
+        SwingUtilities.invokeLater(new Runnable() {
 
             @Override
             public void run() {
                 Game.init(new GUI());
-                Game.startNewGame(new Human(), new Random());
             }
-        });*/
-    Game.init(new GUI());
-    Game.startNewGame(new Human(), new Random());
+        });
+        while (!Game.inited()) {
+            try {
+                Thread.currentThread().sleep(100);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        Game.startNewGame(new Human(), new Random());
     }
 }

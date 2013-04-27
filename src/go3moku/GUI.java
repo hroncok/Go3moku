@@ -66,7 +66,6 @@ public class GUI extends JFrame implements UI, ActionListener {
         this.add(toolbar,BorderLayout.SOUTH);
         this.add(levelsWrapper,BorderLayout.NORTH);
         
-        
         // App ends when clicked close button
         addWindowListener(new WindowAdapter() {
             @Override
@@ -81,6 +80,7 @@ public class GUI extends JFrame implements UI, ActionListener {
         String cmd = evt.getActionCommand();
         if (cmd == "NEWGAME") {
             // TODO
+            //Game.startNewGame(new Human(), new Random());
             return;
         }
         if (!action) {
