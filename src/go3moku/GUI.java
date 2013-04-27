@@ -10,6 +10,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -47,6 +49,7 @@ public class GUI extends JFrame implements UI, ActionListener {
                 for (int k = 0; k < Game.SIZE; k++) {
                     buttons[i][j][k] = new JButton(" ");
                     buttons[i][j][k].setActionCommand(i+" "+j+" "+k); // tricky :)
+                    buttons[i][j][k].addActionListener(this);
                     levels[i].add(buttons[i][j][k]);
                 }
             }
@@ -57,6 +60,7 @@ public class GUI extends JFrame implements UI, ActionListener {
         toolbar = new JPanel();
         newGame = new JButton("New game");
         newGame.setActionCommand("NEWGAME");
+        newGame.addActionListener(this);
         
         toolbar.add(newGame);
         this.add(toolbar,BorderLayout.SOUTH);
@@ -74,10 +78,9 @@ public class GUI extends JFrame implements UI, ActionListener {
     
     @Override
     public void actionPerformed(ActionEvent evt) {
-        System.out.println("magic");
         String cmd = evt.getActionCommand();
         if (cmd == "NEWGAME") {
-            //
+            // TODO
             return;
         }
         if (!action) {
@@ -110,7 +113,13 @@ public class GUI extends JFrame implements UI, ActionListener {
     @Override
     public Coord input() {
         action = true;
-        while (click == null) {}
+        while (click == null) {
+            try {
+                Thread.currentThread().sleep(100);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         Coord ret = click;
         action = false;
         click = null;
