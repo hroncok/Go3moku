@@ -10,9 +10,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.lang.reflect.InvocationTargetException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -30,6 +32,8 @@ public class GUI extends JFrame implements UI, ActionListener {
     private JPanel levelsWrapper;
     private JPanel[]  levels;
     private JButton[][][] buttons;
+    private JComboBox playerx;
+    private JComboBox playero;
     
     private boolean action;
     private Coord click;
@@ -65,7 +69,13 @@ public class GUI extends JFrame implements UI, ActionListener {
         newGame.setActionCommand("NEWGAME");
         newGame.addActionListener(this);
         
+        playerx = new JComboBox(Game.getAvailablePlayers());
+        playero = new JComboBox(Game.getAvailablePlayers());
+        
+        toolbar.add(playerx);
+        toolbar.add(playero);
         toolbar.add(newGame);
+        
         this.add(toolbar,BorderLayout.SOUTH);
         this.add(levelsWrapper,BorderLayout.NORTH);
         
@@ -73,22 +83,43 @@ public class GUI extends JFrame implements UI, ActionListener {
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent we) {
+                if (Game.isPlaying() && !areYouSure()) {
+                        return;
+                }
                 System.exit(0);
             }
         });
+    }
+    
+    private boolean areYouSure() {
+        // TODO: Display a yes/no dialog
+        return true;
     }
     
     @Override
     public void actionPerformed(ActionEvent evt) {
         String cmd = evt.getActionCommand();
         if (cmd == "NEWGAME") {
-            // TODO
-            if (tgs != null) {
-                tgs.kill();
+            try {
+                if (tgs != null) {
+                    if (Game.isPlaying() && !areYouSure()) {
+                        return;
+                    }
+                    tgs.kill();
+                }
+                tgs = new ThreadGame((Player) ((Class) playerx.getSelectedItem()).getConstructors()[0].newInstance(),
+                                     (Player) ((Class) playero.getSelectedItem()).getConstructors()[0].newInstance());
+                (new Thread(tgs)).start();
+                return;
+            } catch (InstantiationException ex) {
+                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IllegalAccessException ex) {
+                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IllegalArgumentException ex) {
+                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (InvocationTargetException ex) {
+                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
             }
-            tgs = new ThreadGame(new Human(), new Random());
-            (new Thread(tgs)).start();
-            return;
         }
         if (!action) {
             return;

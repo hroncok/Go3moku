@@ -4,8 +4,6 @@
  */
 package go3moku;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.SwingUtilities;
 
 /**
@@ -66,7 +64,30 @@ public class Game {
             game.move = Mark.other(game.move);
         }
     }
-
+    
+    /**
+     * Is there actuall gameplay now in action.
+     * If the gameplay is running, returns true.
+     * @return Whether the gameplay is running
+     */
+    public static boolean isPlaying() {
+        if (game == null || game.ui == null || game.move == null) {
+            return false;
+        }
+        return true;
+    }
+    
+    /**
+     * Get all available Player implementations.
+     * @return Array of classes available
+     */
+    public static Class[] getAvailablePlayers() {
+        Class[] players = new Class[2];
+        players[0] = Human.class;
+        players[1] = Random.class;
+        return players;
+    }
+    
     private static boolean coordOutOfRange(Coord c) {
         return ((c.x >= SIZE) || (c.y >= SIZE) || (c.z >= SIZE) || (c.x < 0) || (c.y < 0) || (c.z < 0));
     }
