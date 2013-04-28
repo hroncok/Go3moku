@@ -1,12 +1,8 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package go3moku;
 
 /**
  * Helper class to run the Game cycle in a thread.
- * @author churchyard
+ * @author Miro Hrončok <miro@hroncok.cz>
  */
 public class ThreadGame implements Runnable {
     

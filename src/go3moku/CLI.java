@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package go3moku;
 
 import java.util.Scanner;
@@ -9,7 +5,7 @@ import java.util.Scanner;
 /**
  * CLI for basic usage.
  * Command line interface for the Game.
- * @author churchyard
+ * @author Miro Hrončok <miro@hroncok.cz>
  */
 public class CLI implements UI {
 

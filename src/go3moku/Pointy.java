@@ -1,13 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package go3moku;
 
 /**
  * Artificial intelligence using points.
  * This implementation of Player uses points, to calculate best possible move.
- * @author churchyard
+ * @author Miro Hrončok <miro@hroncok.cz>
  */
 public class Pointy implements Player {
     

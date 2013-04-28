@@ -1,13 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package go3moku;
 
 /**
  * A human player.
  * This class implements human Player of the Game
- * @author churchyard
+ * @author Miro Hrončok <miro@hroncok.cz>
  */
 public class Human implements Player {
 

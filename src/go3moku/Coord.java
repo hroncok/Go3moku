@@ -1,12 +1,8 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package go3moku;
 
 /**
  * Coordinates in 3D model.
- * @author churchyard
+ * @author Miro Hrončok <miro@hroncok.cz>
  */
 public class Coord {
     public int x; ///< X coordinate

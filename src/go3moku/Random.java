@@ -1,13 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package go3moku;
 
 /**
  * Random player.
  * Very easy implementation of Player. It just plays random.
- * @author churchyard
+ * @author Miro Hrončok <miro@hroncok.cz>
  */
 public class Random implements Player {
     

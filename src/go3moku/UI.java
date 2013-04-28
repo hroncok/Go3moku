@@ -1,14 +1,10 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package go3moku;
 
 /**
  * User interface interface.
  * This is interface for user interafce :)
  * This means, GUI, TUI, CLI, whatever, need to implement this.
- * @author churchyard
+ * @author Miro Hrončok <miro@hroncok.cz>
  */
 public interface UI {
     /**

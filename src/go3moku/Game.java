@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package go3moku;
 
 import javax.swing.SwingUtilities;
@@ -9,7 +5,7 @@ import javax.swing.SwingUtilities;
 /**
  * @brief The main singleton Game
  * This class controls the game. It is ment to be singleton.
- * @author churchyard
+ * @author Miro Hrončok <miro@hroncok.cz>
  */
 public class Game {
     private static Game game;

@@ -1,13 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package go3moku;
 
 /**
  * Player interface.
  * All players, human or artificial, implement this.
- * @author churchyard
+ * @author Miro Hrončok <miro@hroncok.cz>
  */
 public interface Player {
     /**

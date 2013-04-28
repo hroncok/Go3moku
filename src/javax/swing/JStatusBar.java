@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package javax.swing;
 
 import java.awt.Font;
@@ -10,7 +6,7 @@ import javax.swing.border.BevelBorder;
 /**
  * Status bar for Swing.
  * It's a JPanel with a JLable, looking like a status bar.
- * @author churchyard
+ * @author Miro Hrončok <miro@hroncok.cz>
  */
 public class JStatusBar extends JPanel {
     private JLabel statusLabel;

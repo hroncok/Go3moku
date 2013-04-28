@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package go3moku;
 
 import java.awt.BorderLayout;
@@ -24,7 +20,7 @@ import javax.swing.JStatusBar;
 /**
  * GUI for the Game.
  * Graphical interface for the Game
- * @author churchyard
+ * @author Miro Hrončok <miro@hroncok.cz>
  */
 public class GUI extends JFrame implements UI, ActionListener {
 
