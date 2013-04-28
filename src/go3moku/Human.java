@@ -5,14 +5,15 @@
 package go3moku;
 
 /**
- * @brief A human player
+ * A human player.
  * This class implements human Player of the Game
  * @author churchyard
  */
 public class Human implements Player {
 
     /**
-     * Asks the Game, what does human user want to do via UI.
+     * Asks the Game, what does human user want to do.
+     * Via UI.
      */
     @Override
     public Coord play() {

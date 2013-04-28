@@ -5,7 +5,7 @@
 package go3moku;
 
 /**
- * @brief Types of markers
+ * Types of markers.
  * This should basically be X and O.
  * @author churchyard
  */
@@ -13,7 +13,7 @@ public enum Mark {
     X, O;
     
     /**
-     * @brief For a given mark, return the other one.
+     * For a given mark, return the other one.
      * @param mark Given mark
      * @return Other mark. Or null when null.
      */

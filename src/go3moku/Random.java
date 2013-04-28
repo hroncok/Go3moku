@@ -5,14 +5,14 @@
 package go3moku;
 
 /**
- * @brief Random player
+ * Random player.
  * Very easy implementation of Player. It just plays random.
  * @author churchyard
  */
 public class Random implements Player {
     
     /**
-     * Just pick a random coordinates and hit the Game
+     * Just pick a random coordinates and hit the Game.
      */
     @Override
     public Coord play() {

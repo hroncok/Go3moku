@@ -7,8 +7,8 @@ package go3moku;
 import java.util.Scanner;
 
 /**
- * @brief CLI for basic usage
- * Command line interface for the Game
+ * CLI for basic usage.
+ * Command line interface for the Game.
  * @author churchyard
  */
 public class CLI implements UI {

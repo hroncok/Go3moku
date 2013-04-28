@@ -5,7 +5,7 @@
 package go3moku;
 
 /**
- * @brief Helper class to run the Game cycle in a thread
+ * Helper class to run the Game cycle in a thread.
  * @author churchyard
  */
 public class ThreadGame implements Runnable {

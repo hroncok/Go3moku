@@ -17,7 +17,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /**
- *
+ * GUI for the Game.
+ * Graphical interface for the Game
  * @author churchyard
  */
 public class GUI extends JFrame implements UI, ActionListener {

@@ -25,7 +25,7 @@ public class Game {
     private Mark[][][] fields = new Mark[SIZE][SIZE][SIZE];
     
     /**
-     * @brief Sets the UI and starts the application
+     * Sets the UI and starts the application.
      * This is only meant to be run once, at the begining.
      * @param ui The UI to use, cannot be chnaged during one runtime
      * @throws ExceptionInInitializerError When init was already run once before
@@ -39,7 +39,7 @@ public class Game {
     }
     
     /**
-     * @brief Initialise a new gameplay and run the main cycle
+     * Initialise a new gameplay and run the main cycle.
      * Sets the players for the game and clears all fields
      * @param x
      * @param o
@@ -230,7 +230,7 @@ public class Game {
     }
     
     /**
-     * @brief Get input form UI
+     * Get input form UI.
      * When human Player wants to move, this is the way
      * @return Coordinates of user move
      */
@@ -239,7 +239,7 @@ public class Game {
     }
     
     /**
-     * @brief Is the Game initialised
+     * Is the Game initialised.
      * @return Wheather the Game is initialised
      */
     public static boolean inited() {
@@ -250,6 +250,7 @@ public class Game {
     }
     
     /**
+     * Main program.
      * @param args the command line arguments
      */
     public static void main(String[] args) {

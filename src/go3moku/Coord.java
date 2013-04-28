@@ -5,7 +5,7 @@
 package go3moku;
 
 /**
- * @brief Coordinates in 3D model
+ * Coordinates in 3D model.
  * @author churchyard
  */
 public class Coord {
