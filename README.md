@@ -13,4 +13,8 @@ ant jar
 
 Develop
 -------
-If you want, you can implement a better user interface by implementing a **UI** interface, or you can create smarter computer players by implementing **Player** interface.
+If you want, you can implement a better user interface by implementing an **UI** interface, or you can create smarter computer players by implementing **Player** interface.
+
+License
+-------
+This is a free software, it is released under the terms of ISC license (more info in COPYING).
