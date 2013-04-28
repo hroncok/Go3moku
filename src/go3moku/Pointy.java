@@ -170,7 +170,6 @@ public class Pointy implements Player {
                 }
             }
         }
-        System.out.println(c.x+","+c.y+","+c.z+"="+points[c.x][c.y][c.z]);
         return c;
     }
     
