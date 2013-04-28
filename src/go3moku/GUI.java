@@ -122,8 +122,8 @@ public class GUI extends JFrame implements UI, ActionListener {
                     }
                     tgs.kill();
                 }
-                tgs = new ThreadGame((Player) Class.forName("go3moku."+playerx.getSelectedItem()).getConstructors()[0].newInstance(),
-                                     (Player) Class.forName("go3moku."+playero.getSelectedItem()).getConstructors()[0].newInstance());
+                tgs = new ThreadGame((Player) Class.forName(Game.class.getPackage().getName()+"."+playerx.getSelectedItem()).getConstructors()[0].newInstance(),
+                                     (Player) Class.forName(Game.class.getPackage().getName()+"."+playero.getSelectedItem()).getConstructors()[0].newInstance());
                 (new Thread(tgs)).start();
                 return;
             } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
