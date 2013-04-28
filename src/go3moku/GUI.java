@@ -17,6 +17,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JStatusBar;
 
@@ -98,7 +99,7 @@ public class GUI extends JFrame implements UI, ActionListener {
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent we) {
-                if (Game.isPlaying() && !areYouSure()) {
+                if (Game.isPlaying() && !areYouSure("The current gameplay won't be saved. Dou you really want to quit?")) {
                         return;
                 }
                 System.exit(0);
@@ -106,9 +107,8 @@ public class GUI extends JFrame implements UI, ActionListener {
         });
     }
     
-    private boolean areYouSure() {
-        // TODO: Display a yes/no dialog
-        return true;
+    private boolean areYouSure(String text) {
+        return JOptionPane.showConfirmDialog(null, text, "Are you sure?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION;
     }
     
     @Override
@@ -117,7 +117,7 @@ public class GUI extends JFrame implements UI, ActionListener {
         if (cmd == "NEWGAME") {
             try {
                 if (tgs != null) {
-                    if (Game.isPlaying() && !areYouSure()) {
+                    if (Game.isPlaying() && !areYouSure("This will end the current gameplay. Are you sure about that?")) {
                         return;
                     }
                     tgs.kill();
