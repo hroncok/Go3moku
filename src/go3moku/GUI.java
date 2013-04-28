@@ -47,12 +47,12 @@ public class GUI extends JFrame implements UI, ActionListener {
     public GUI() {
         setVisible(true);
         setResizable(false);
-        setSize(1024, 220);
+        setSize(1000, 220);
 
         action = false;
 
         levelsWrapper = new JPanel();
-        levelsWrapper.setLayout(new GridLayout(1, Game.SIZE, 4, 4));        
+        levelsWrapper.setLayout(new GridLayout(1, Game.SIZE, 16, 0));        
         levels = new JPanel[Game.SIZE];
         buttons = new JButton[Game.SIZE][Game.SIZE][Game.SIZE];
         for (int i = 0; i < Game.SIZE; i++) {
