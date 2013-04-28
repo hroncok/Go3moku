@@ -79,12 +79,12 @@ public class Game {
     
     /**
      * Get all available Player implementations.
-     * @return Array of classes available
+     * @return Array of classes names available
      */
-    public static Class[] getAvailablePlayers() {
-        Class[] players = new Class[2];
-        players[0] = Human.class;
-        players[1] = Random.class;
+    public static String[] getAvailablePlayers() {
+        String[] players = new String[2];
+        players[0] = "Human";
+        players[1] = "Random";
         return players;
     }
     
