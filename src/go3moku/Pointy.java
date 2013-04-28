@@ -4,11 +4,9 @@
  */
 package go3moku;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 /**
- *
+ * Artificial intelligence using points.
+ * This implementation of Player uses points, to calculate best possible move.
  * @author churchyard
  */
 public class Pointy implements Player {
