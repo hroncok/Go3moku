@@ -260,13 +260,5 @@ public class Game {
                 Game.init(new GUI());
             }
         });
-        /*while (!Game.inited()) {
-            try {
-                Thread.currentThread().sleep(100);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        Game.startNewGame(new Human(), new Random());*/
     }
 }

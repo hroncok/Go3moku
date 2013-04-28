@@ -8,12 +8,12 @@ package go3moku;
  *
  * @author churchyard
  */
-public class ThreadGameStart implements Runnable {
+public class ThreadGame implements Runnable {
     
     private Player x;
     private Player o;
     
-    public ThreadGameStart(Player x, Player o) {
+    public ThreadGame(Player x, Player o) {
         this.x = x;
         this.o = o;
     }

@@ -22,7 +22,7 @@ import javax.swing.JPanel;
  */
 public class GUI extends JFrame implements UI, ActionListener {
 
-    private ThreadGameStart tgs;
+    private ThreadGame tgs;
     
     private JButton newGame;
     private JPanel toolbar;
@@ -85,7 +85,7 @@ public class GUI extends JFrame implements UI, ActionListener {
             if (tgs != null) {
                 tgs.kill();
             }
-            tgs = new ThreadGameStart(new Human(), new Random());
+            tgs = new ThreadGame(new Human(), new Random());
             (new Thread(tgs)).start();
             return;
         }
