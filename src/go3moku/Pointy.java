@@ -176,11 +176,6 @@ public class Pointy implements Player {
     
     @Override
     public Coord play() {
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(Pointy.class.getName()).log(Level.SEVERE, null, ex);
-        }
         // A bit of optimalisation
         if (Game.isEmpty()) {
             return new Coord(); // A corner
