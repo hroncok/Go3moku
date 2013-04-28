@@ -21,6 +21,7 @@ public class Game {
     private UI ui;
     private Mark move = null;
     private Mark[][][] fields = new Mark[SIZE][SIZE][SIZE];
+    private boolean empty;
     
     /**
      * Sets the UI and starts the application.
@@ -56,11 +57,13 @@ public class Game {
         }
         game.move = Mark.X;
         game.ui.startNew();
+        game.empty = true;
         while (game.move != null) {
             game.ui.infoText("Player "+game.move+" plays now");
             Player pl = currentPlayer();
             // While the move is not legal, ask for other one
             while (!play(pl.play())) {}
+            game.empty = false;
             // Other player goes
             game.move = Mark.other(game.move);
         }
@@ -79,13 +82,22 @@ public class Game {
     }
     
     /**
+     * Is the board all empty.
+     * @return Wheather is the board all ampty
+     */
+    public static boolean isEmpty() {
+        return game.empty;
+    }
+    
+    /**
      * Get all available Player implementations.
      * @return Array of classes names available
      */
     public static String[] getAvailablePlayers() {
-        String[] players = new String[2];
+        String[] players = new String[3];
         players[0] = "Human";
         players[1] = "Random";
+        players[2] = "Pointy";
         return players;
     }
     
@@ -96,6 +108,7 @@ public class Game {
     private static boolean play(Coord c) {
         // Ilegal move
         if (coordOutOfRange(c) || game.fields[c.x][c.y][c.z] != null) {
+            game.ui.infoText("Ilegal move!");
             return false;
         }
         // Put it to data
@@ -249,6 +262,15 @@ public class Game {
             return game.o;
         }
         return null;
+    }
+    
+    /**
+     * Tells what's on the given coordinates.
+     * @param c Coordinates of the desired field
+     * @return The value of the given field
+     */
+    public static Mark whatsOn(Coord c) {
+        return game.fields[c.x][c.y][c.z];
     }
     
     /**

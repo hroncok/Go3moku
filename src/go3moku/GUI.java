@@ -99,9 +99,6 @@ public class GUI extends JFrame implements UI, ActionListener {
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent we) {
-                if (Game.isPlaying() && !areYouSure("The current gameplay won't be saved. Dou you really want to quit?")) {
-                        return;
-                }
                 System.exit(0);
             }
         });

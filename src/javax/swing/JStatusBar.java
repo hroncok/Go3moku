@@ -23,7 +23,7 @@ public class JStatusBar extends JPanel {
         this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
         statusLabel = new JLabel();
         statusLabel.setHorizontalAlignment(SwingConstants.LEFT);
-        statusLabel.setFont(new Font("sans",Font.PLAIN,statusLabel.getFont().getSize()));
+        statusLabel.setFont(new Font("sans",Font.PLAIN,statusLabel.getFont().getSize()-1));
         this.add(statusLabel);
     }
     
