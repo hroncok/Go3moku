@@ -22,6 +22,8 @@ import javax.swing.JPanel;
  */
 public class GUI extends JFrame implements UI, ActionListener {
 
+    private ThreadGameStart tgs;
+    
     private JButton newGame;
     private JPanel toolbar;
     private JPanel levelsWrapper;
@@ -80,7 +82,11 @@ public class GUI extends JFrame implements UI, ActionListener {
         String cmd = evt.getActionCommand();
         if (cmd == "NEWGAME") {
             // TODO
-            //Game.startNewGame(new Human(), new Random());
+            if (tgs != null) {
+                tgs.kill();
+            }
+            tgs = new ThreadGameStart(new Human(), new Random());
+            (new Thread(tgs)).start();
             return;
         }
         if (!action) {
@@ -135,5 +141,4 @@ public class GUI extends JFrame implements UI, ActionListener {
     public void removeInfoText() {
         // Do nothing yet
     }
-    
 }
