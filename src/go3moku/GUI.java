@@ -16,7 +16,9 @@ import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JStatusBar;
 
 /**
  * GUI for the Game.
@@ -34,6 +36,9 @@ public class GUI extends JFrame implements UI, ActionListener {
     private JButton[][][] buttons;
     private JComboBox playerx;
     private JComboBox playero;
+    private JLabel labelx;
+    private JLabel labelo;
+    private JStatusBar statusBar;
     
     private boolean action;
     private Coord click;
@@ -41,7 +46,7 @@ public class GUI extends JFrame implements UI, ActionListener {
     public GUI() {
         setVisible(true);
         setResizable(false);
-        setSize(1024, 170);
+        setSize(1024, 220);
 
         action = false;
 
@@ -72,12 +77,22 @@ public class GUI extends JFrame implements UI, ActionListener {
         playerx = new JComboBox(Game.getAvailablePlayers());
         playero = new JComboBox(Game.getAvailablePlayers());
         
+        labelx = new JLabel("X:");
+        labelo = new JLabel("O:");
+        
+        statusBar = new JStatusBar();
+        statusBar.setMessage("Select the players form the top panel and start a New game");
+        
+        toolbar.add(labelx);
         toolbar.add(playerx);
+        toolbar.add(labelo);
         toolbar.add(playero);
         toolbar.add(newGame);
         
-        this.add(toolbar,BorderLayout.SOUTH);
-        this.add(levelsWrapper,BorderLayout.NORTH);
+        
+        this.add(toolbar,BorderLayout.NORTH);
+        this.add(levelsWrapper);
+        this.add(statusBar,BorderLayout.SOUTH);
         
         // App ends when clicked close button
         addWindowListener(new WindowAdapter() {
@@ -147,7 +162,7 @@ public class GUI extends JFrame implements UI, ActionListener {
         action = true;
         while (click == null) {
             try {
-                Thread.currentThread().sleep(100);
+                Thread.sleep(100);
             } catch (InterruptedException ex) {
                 Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -160,11 +175,11 @@ public class GUI extends JFrame implements UI, ActionListener {
 
     @Override
     public void infoText(String message) {
-        // Do nothing yet
+        statusBar.setMessage(message);
     }
 
     @Override
     public void removeInfoText() {
-        // Do nothing yet
+        statusBar.clearMessage();
     }
 }

@@ -57,6 +57,7 @@ public class Game {
         game.move = Mark.X;
         game.ui.startNew();
         while (game.move != null) {
+            game.ui.infoText("Player "+game.move+" plays now");
             Player pl = currentPlayer();
             // While the move is not legal, ask for other one
             while (!play(pl.play())) {}
@@ -272,15 +273,17 @@ public class Game {
     
     /**
      * Main program.
-     * @param args the command line arguments
+     * @param args The command line arguments
      */
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
+        if (args.length == 0) {
+            SwingUtilities.invokeLater(new Runnable() {
 
-            @Override
-            public void run() {
-                Game.init(new GUI());
-            }
-        });
+                @Override
+                public void run() {
+                    Game.init(new GUI());
+                }
+            });
+        }
     }
 }
