@@ -1,5 +1,8 @@
 package go3moku;
 
+import java.lang.reflect.InvocationTargetException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.SwingUtilities;
 
 /**
@@ -318,6 +321,30 @@ public class Game {
                     Game.init(new GUI());
                 }
             });
+        } else if (args[0].equals("--help")) {
+            System.out.println("Go3moku");
+            System.out.println("Copyright (c) 2013, Miro Hrončok <miro@hroncok.cz>, ISC license");
+            System.out.println("");
+            System.out.println("To play with GUI, run with no argument");
+            System.out.println("To play with CLI, run with --cli Player Player");
+            System.out.println("");
+            System.out.println("Available Players:");
+            for (int i = 0; i < Game.getAvailablePlayers().length; i++) {
+                System.out.println("    "+Game.getAvailablePlayers()[i]);
+            }
+        } else if (args[0].equals("--cli")) {
+            if (args.length != 3) {
+                System.err.println("Error: --cli needs 2 arguments. See --help formore  information.");
+                System.exit(1);
+            }
+            try {
+                Game.init(new CLI());
+                Game.startNewGame((Player) Class.forName(Game.class.getPackage().getName()+"."+args[1]).getConstructors()[0].newInstance(),
+                                  (Player) Class.forName(Game.class.getPackage().getName()+"."+args[2]).getConstructors()[0].newInstance());
+            } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
+                System.err.println("Error: Could not recognise selected Player. See --help formore  information.");
+                System.exit(1);
+            }
         }
     }
 }
