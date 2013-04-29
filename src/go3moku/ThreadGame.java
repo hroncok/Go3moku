@@ -11,7 +11,7 @@ public class ThreadGame implements Runnable {
     
     /**
      * Prepare the thread.
-     * Give information about Players.
+     * Set information about Players.
      * @param x First Player (X)
      * @param o Second Player (O)
      */
@@ -22,7 +22,7 @@ public class ThreadGame implements Runnable {
     
     /**
      * Start the game.
-     * Uses previously given information about Players
+     * Uses previously given information about Players.
      */
     @Override
     public void run() {

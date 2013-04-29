@@ -6,7 +6,10 @@ package go3moku;
  * @author Miro Hrončok <miro@hroncok.cz>
  */
 public class Suicidal extends Pointy {
-    // This actually gives minimum
+    /**
+     * Get the least valuable field.
+     * @return Coordinates with minimum points
+     */
     @Override
     protected Coord withMaximumPoints() {
         Coord c = new Coord();

@@ -1,12 +1,10 @@
 package go3moku;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.SwingUtilities;
 
 /**
- * @brief The main singleton Game
+ * The main singleton Game.
  * This class controls the game. It is ment to be singleton.
  * @author Miro Hrončok <miro@hroncok.cz>
  */
@@ -103,10 +101,20 @@ public class Game {
         return players;
     }
     
+    /**
+     * Tells if the given coordinates are pout of the game board.
+     * @param c Given coordinates
+     * @return True if the coordinates are out of the board
+     */
     private static boolean coordOutOfRange(Coord c) {
         return ((c.x >= SIZE) || (c.y >= SIZE) || (c.z >= SIZE) || (c.x < 0) || (c.y < 0) || (c.z < 0));
     }
     
+    /**
+     * Try to put current Player's mark on the given coordinates
+     * @param c Given coordinates
+     * @return True if the move was legal
+     */
     private static boolean play(Coord c) {
         checkInit();
         // Ilegal move
@@ -129,6 +137,11 @@ public class Game {
         return true;
     }
     
+    /**
+     * Checks if the board is full of marks.
+     * This is used to realise a draw.
+     * @return True if it's a draw, i.e. the board is full
+     */
     private static boolean checkFull() {
         checkInit();
         for (int i = 0; i < SIZE; i++) {
@@ -143,12 +156,27 @@ public class Game {
         return true;
     }
     
+    /**
+     * Checks if the given four coordinates are with the same mark.
+     * This is used to determinate, if this combination wins the row.
+     * This doesn't check, if given coordinates are in a row!
+     * @param a First coordinates
+     * @param b Second coordinates
+     * @param c Third coordinates
+     * @param d Fourth coordinates
+     * @return True if given coordinates have the same mark
+     */
     private static boolean check4Win(Mark a, Mark b, Mark c, Mark d) {
         // They cannot be all nulls, as one of them was just played
         return (a == b && a == c && a == d);
     }
     
-    // This will be pain, brace yourself
+    /**
+     * Checks all possible win situations for a victory.
+     * It is really repetitive code, but can't think a way of doing it better.
+     * @param c Coordinates of last move
+     * @return True if the given move wins the Game
+     */
     private static boolean checkWin(Coord c) {
         checkInit();
         // Row
@@ -259,6 +287,10 @@ public class Game {
         return false;
     }
     
+    /**
+     * Get the reference to the player, who playes this turn.
+     * @return Current player or null if the gameplay is not running
+     */
     private static Player currentPlayer() {
         checkInit();
         if (game.move == Mark.X) {
@@ -291,6 +323,10 @@ public class Game {
         return game.ui.input();
     }
     
+    /**
+     * Check if the Game was initialised
+     * @throws ExceptionInInitializerError When teh game was not initialised yet
+     */
     private static void checkInit() {
         if (game == null) {
             throw new ExceptionInInitializerError("Game was not initialised!");

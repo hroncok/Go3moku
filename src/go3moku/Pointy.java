@@ -14,6 +14,14 @@ public class Pointy implements Player {
         points = new int[Game.SIZE][Game.SIZE][Game.SIZE];
     }
     
+    /**
+     * Counts how many times is the given mark present in given coordinates.
+     * @param m Given mark
+     * @param a First coordinates
+     * @param b Second coordinates
+     * @param c Third coordinates
+     * @return The amount of given marks present
+     */
     protected int count(Mark m, Coord a, Coord b, Coord c) {
         int ret = 0;
         if (Game.whatsOn(a) == m) {
@@ -28,6 +36,13 @@ public class Pointy implements Player {
         return ret;
     }
     
+    /**
+     * Calculates the points for combination of marks on given coordinates.
+     * @param a First coordinates
+     * @param b Second coordinates
+     * @param c Third coordinates
+     * @return The amount of points calculated
+     */
     protected int evaluate(Coord a, Coord b, Coord c) {
         int mec = count(me,a,b,c);
         int hec = count(Mark.other(me),a,b,c);
@@ -67,6 +82,11 @@ public class Pointy implements Player {
         return 0; // Should never happen
     }
     
+    /**
+     * Calculate total ponts for given field.
+     * @param c Coordinates of the given field
+     * @return Totoal amoutn of points for given field
+     */
     protected int evaluate(Coord c) {
         int p = 0;
         // Row
@@ -138,6 +158,9 @@ public class Pointy implements Player {
         return p;
     }
     
+    /**
+     * Calculates points for all empty fields.
+     */
     protected void evaluateAll() {
         for (int i = 0; i < Game.SIZE; i++) {
             for (int j = 0; j < Game.SIZE; j++) {
@@ -150,6 +173,10 @@ public class Pointy implements Player {
         }
     }
     
+    /**
+     * Get the most valuable field.
+     * @return Coordinates with maximum points
+     */
     protected Coord withMaximumPoints() {
         Coord c = new Coord();
         if (Game.whatsOn(c) != null) { // and was not evaluated

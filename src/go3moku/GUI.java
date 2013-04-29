@@ -101,6 +101,11 @@ public class GUI extends JFrame implements UI, ActionListener {
         });
     }
     
+    /**
+     * Displays an Yes or No dialog with the given question
+     * @param text Question to display
+     * @return True if the answer is Yes.
+     */
     private boolean areYouSure(String text) {
         return JOptionPane.showConfirmDialog(null, text, "Are you sure?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION;
     }
