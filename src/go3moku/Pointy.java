@@ -7,14 +7,14 @@ package go3moku;
  */
 public class Pointy implements Player {
     
-    private Mark me;
-    private int[][][] points;
+    protected Mark me;
+    protected int[][][] points;
     
     public Pointy() {
         points = new int[Game.SIZE][Game.SIZE][Game.SIZE];
     }
     
-    private int count(Mark m, Coord a, Coord b, Coord c) {
+    protected int count(Mark m, Coord a, Coord b, Coord c) {
         int ret = 0;
         if (Game.whatsOn(a) == m) {
             ret++;
@@ -28,7 +28,7 @@ public class Pointy implements Player {
         return ret;
     }
     
-    private int evaluate(Coord a, Coord b, Coord c) {
+    protected int evaluate(Coord a, Coord b, Coord c) {
         int mec = count(me,a,b,c);
         int hec = count(Mark.other(me),a,b,c);
         
@@ -67,7 +67,7 @@ public class Pointy implements Player {
         return 0; // Should never happen
     }
     
-    private int evaluate(Coord c) {
+    protected int evaluate(Coord c) {
         int p = 0;
         // Row
         p += evaluate(new Coord((c.x+1) % Game.SIZE,c.y,c.z),
@@ -138,7 +138,7 @@ public class Pointy implements Player {
         return p;
     }
     
-    private void evaluateAll() {
+    protected void evaluateAll() {
         for (int i = 0; i < Game.SIZE; i++) {
             for (int j = 0; j < Game.SIZE; j++) {
                 for (int k = 0; k < Game.SIZE; k++) {
@@ -150,7 +150,7 @@ public class Pointy implements Player {
         }
     }
     
-    private Coord withMaximumPoints() {
+    protected Coord withMaximumPoints() {
         Coord c = new Coord();
         if (Game.whatsOn(c) != null) { // and was not evaluated
             points[0][0][0] = Integer.MIN_VALUE;
