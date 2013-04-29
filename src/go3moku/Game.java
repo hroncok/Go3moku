@@ -90,10 +90,11 @@ public class Game {
      * @return Array of classes names available
      */
     public static String[] getAvailablePlayers() {
-        String[] players = new String[3];
+        String[] players = new String[4];
         players[0] = "Human";
         players[1] = "Random";
         players[2] = "Pointy";
+        players[3] = "Suicidal";
         return players;
     }
     
