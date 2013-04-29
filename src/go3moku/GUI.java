@@ -31,8 +31,8 @@ public class GUI extends JFrame implements UI, ActionListener {
     private JPanel levelsWrapper;
     private JPanel[]  levels;
     private JButton[][][] buttons;
-    private JComboBox playerx;
-    private JComboBox playero;
+    private JComboBox<String> playerx;
+    private JComboBox<String> playero;
     private JLabel labelx;
     private JLabel labelo;
     private JStatusBar statusBar;
@@ -72,8 +72,8 @@ public class GUI extends JFrame implements UI, ActionListener {
         newGame.setActionCommand("NEWGAME");
         newGame.addActionListener(this);
         
-        playerx = new JComboBox(Game.getAvailablePlayers());
-        playero = new JComboBox(Game.getAvailablePlayers());
+        playerx = new JComboBox<String>(Game.getAvailablePlayers());
+        playero = new JComboBox<String>(Game.getAvailablePlayers());
         
         labelx = new JLabel("X:");
         labelo = new JLabel("O:");
