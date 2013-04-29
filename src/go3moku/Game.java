@@ -40,6 +40,7 @@ public class Game {
      * @param o
      */
     public static void startNewGame(Player x, Player o) {
+        checkInit();
         game.x = x;
         game.x.set(Mark.X);
         game.o = o;
@@ -82,6 +83,7 @@ public class Game {
      * @return Wheather is the board all ampty
      */
     public static boolean isEmpty() {
+        checkInit();
         return game.empty;
     }
     
@@ -103,6 +105,7 @@ public class Game {
     }
     
     private static boolean play(Coord c) {
+        checkInit();
         // Ilegal move
         if (coordOutOfRange(c) || game.fields[c.x][c.y][c.z] != null) {
             game.ui.infoText("Ilegal move!");
@@ -124,6 +127,7 @@ public class Game {
     }
     
     private static boolean checkFull() {
+        checkInit();
         for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
                 for (int k = 0; k < SIZE; k++) {
@@ -143,6 +147,7 @@ public class Game {
     
     // This will be pain, brace yourself
     private static boolean checkWin(Coord c) {
+        checkInit();
         // Row
         if (check4Win(game.fields[c.x][c.y][c.z],
                       game.fields[(c.x+1) % SIZE][c.y][c.z],
@@ -252,6 +257,7 @@ public class Game {
     }
     
     private static Player currentPlayer() {
+        checkInit();
         if (game.move == Mark.X) {
             return game.x;
         }
@@ -267,6 +273,7 @@ public class Game {
      * @return The value of the given field
      */
     public static Mark whatsOn(Coord c) {
+        checkInit();
         return game.fields[c.x][c.y][c.z];
     }
     
@@ -276,7 +283,15 @@ public class Game {
      * @return Coordinates of user move
      */
     public static Coord uiInput() {
+        checkInit();
+        
         return game.ui.input();
+    }
+    
+    private static void checkInit() {
+        if (game == null) {
+            throw new ExceptionInInitializerError("Game was not initialised!");
+        }
     }
     
     /**
