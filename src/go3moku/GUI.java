@@ -72,8 +72,8 @@ public class GUI extends JFrame implements UI, ActionListener {
         newGame.setActionCommand("NEWGAME");
         newGame.addActionListener(this);
         
-        playerx = new JComboBox<String>(Game.getAvailablePlayers());
-        playero = new JComboBox<String>(Game.getAvailablePlayers());
+        playerx = new JComboBox<>(Game.getAvailablePlayers());
+        playero = new JComboBox<>(Game.getAvailablePlayers());
         
         labelx = new JLabel("X:");
         labelo = new JLabel("O:");
