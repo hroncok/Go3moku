@@ -43,7 +43,7 @@ public class GUI extends JFrame implements UI, ActionListener {
     public GUI() {
         setVisible(true);
         setResizable(false);
-        setSize(850, 220);
+        setSize(775, 230);
         setTitle("Go3moku");
 
         action = false;
